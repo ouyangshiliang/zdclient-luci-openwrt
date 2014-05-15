@@ -3,6 +3,7 @@
 #原项目主页：https://code.google.com/p/zdcclient/
 #zdclient for openwrt with luci
 #Author:ouyang
+github:https://github.com/ouyangshiliang/zdclient-luci-openwrt
 #Email:ouyangshiliang223@gmail.com
 
 include $(TOPDIR)/rules.mk
@@ -10,7 +11,7 @@ include $(TOPDIR)/rules.mk
 	PKG_VERSION:=1.2.2
 	PKG_RELEASE:=1
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=http://210.43.69.123/
+PKG_SOURCE_URL:=https://raw.githubusercontent.com/ouyangshiliang/zdclient-luci-openwrt/master/
 PKG_INSTALL:=1
 PKG_CAT:=zcat
 
