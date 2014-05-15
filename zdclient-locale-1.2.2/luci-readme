@@ -1,0 +1,46 @@
+1、将zdclient目录上传至openwrt-dreambox/feeds/dreambox_packages/ openwrt-dreambox/feeds/luci/luci/luci/applications/，此处合并即可。还需要修改feeds目录下dreambox_packages.index索引文件中相应的值
+
+Source-Makefile: feeds/dreambox_packages/zdclient/Makefile
+Package: zdclient
+Submenu: CERNET
+Version: 1.2.2
+Depends: +libpcap
+Provides: 
+Section: net
+Category: Network
+Title: An CERNET client daemon
+Maintainer: OpenWrt Developers Team <openwrt-devel@openwrt.org>
+Source: zdclient-1.2.2.tar.gz
+Type: ipkg
+Description: An CERNET client daemon,
+Most usually used in China collages.
+http://code.google.com/p/mentohust/
+@@
+
+2、修改feeds目录下luci.index索引文件中相应的值
+
+Package: luci-app-zdclient
+Submenu: 3. Applications
+Version: trunk+svn-1
+Depends: +PACKAGE_luci-app-zdclient:zdclient
+Provides: 
+Build-Depends: lua/host
+Section: luci
+Category: LuCI
+Title: zdclient
+Maintainer: LuCI Development Team <luci@lists.subsignal.org>
+Source: 
+Type: ipkg
+Description: zdclient configuration module
+http://luci.subsignal.org/
+@@
+
+
+3、还有openwrt-dreambox/feeds/luci/luci/Makefile
+/home/ouyang/openwrt-pandorabox/feeds/luci/contrib/package/luci
+文件中添加下面一段
+$(eval $(call application,zdclient,zdclient configuration module,\
+	 +PACKAGE_luci-app-zdclient:zdclient))
+复制代码
+
+4、完成再./scripts/feeds install -a

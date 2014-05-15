@@ -1,0 +1,11 @@
+#!/bin/sh
+
+uci -q batch <<-EOF >/dev/null
+	delete ucitrack.@zdclient[-1]
+	add ucitrack zdclient
+	set ucitrack.@zdclient[-1].init=zdclient
+	commit ucitrack
+EOF
+
+rm -f /tmp/luci-indexcache
+exit 0

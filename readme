@@ -1,0 +1,14 @@
+zdclient神州数码认证程序
+山寨版的神州数码802.1x认证supplicant，基于pcap库的C语言的跨平台的原生客户端。
+原项目地址：https://code.google.com/p/zdcclient/
+原开发者：Pentie、michael8090、zhhtc200、zhouJFu、walkingsky（openwrt参照部分makefile.）
+未经许可fork至github，仅供个人使用，请各位大神见谅，如有冒犯请原谅！！
+
+makefile 单独使用，将makefile放在openwrtde package如下如package、network/zdclient下，make menuconfig 
+编译选择位置为 net>Network>CERNET. 选中后即会从github获取打包好的源码进行编译 
+
+zdclient-locale-1.2.2则为下载至本地的源码包
+
+openwrt打包编译源码，默认拨号接口为第二网卡接口，即最trunk本（稳定版）openwrt-dreambox的eth1接口。
+对应拨号配置文件为runzdclient,openwrt中的配置文件为/usr/sbin/runzdclient，
+以依赖文件为 +bash +libpcap +libstdcpp +libiconv-full +libintl-full，

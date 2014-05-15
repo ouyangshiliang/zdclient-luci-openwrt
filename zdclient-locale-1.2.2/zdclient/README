@@ -1,0 +1,21 @@
+#Zdclient
+#Author:pentie
+#原项目主页：https://code.google.com/p/zdcclient/
+#zdclient for openwrt with luci
+#Author:ouyang
+#Email:ouyangshiliang223@gmail.com
+
+zdclient神州数码认证程序
+山寨版的神州数码802.1x认证supplicant，基于pcap库的C语言的跨平台的原生客户端。
+原项目地址：https://code.google.com/p/zdcclient/
+原开发者：Pentie、michael8090、zhhtc200、zhouJFu、walkingsky（openwrt参照部分makefile.）
+未经许可fork至github，仅供个人使用，请各位大神见谅，如有冒犯请原谅！！
+openwrt打包编译源码，默认拨号接口为第二网卡接口，即最trunk本（稳定版）openwrt-dreambox的eth1接口。对应拨号配置文件为runzdclient,openwrt中的配置文件为/usr/sbin/runzdclient，以依赖文件为 +bash +libpcap +libstdcpp +libiconv-full +libintl-full，编译选择位置为 net>Network>CERNET.
+
+lin 438 报文0x02 区别0x00
+ uint8_t eap_resp_md5_head[10] = {0x01, 0x00,
+                                   0x00, 6 + 16 + username_length + 46, /* eapol-length */
+                                   0x02, 0x02,  
+                                   0x00, 6 + 16 + username_length, /* eap-length */
+                                   0x04, 0x10};
+    eap_response_md5ch = malloc (14 + 4 + 6 + 16 + username_length + 46);

@@ -1,0 +1,67 @@
+#!/bin/sh /etc/rc.common
+#Zdclient
+#Author:pentie
+#原项目主页：https://code.google.com/p/zdcclient/
+#zdclient for openwrt with luci
+#Author:ouyang
+#Email:ouyangshiliang223@gmail.com
+
+START=55
+STOP=10
+
+start()
+{
+if [ $(uci get zdclient.@option[0].enable) ] ;
+then
+{
+			zdclient -l >/dev/null 2>&1
+			runzdclient >/dev/null 2>&1
+}
+else
+	stop
+fi
+
+if [ $(uci get zdclient.@option[0].boot) ] ;
+then
+	/etc/init.d/zdclient enable
+else
+	/etc/init.d/zdclient disable
+fi
+}
+
+
+stop()
+{
+sync
+zdclient -l >/dev/null 2>&1
+}
+
+restart()
+{
+stop
+start
+}
+
+test()
+{
+if  test $(pidof zdclient);
+		then
+		runzdclient >/dev/null 2>&1
+		else
+#判断能否与网管通信
+		{
+		gateway=$(netstat -r | grep 'default' | awk '{ print $2}')
+		ping -c 2 $gateway
+			if [ $? = 1 ];then
+			{
+			zdclient -l >/dev/null 2>&1
+			sleep 1
+			runzdclient >/dev/null 2>&1
+			}
+			fi
+		}
+		fi
+}
+
+
+

@@ -1,0 +1,112 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8"
+
+msgid "zdclient"
+msgstr "神州数码校园网认证"
+
+msgid "0(no)"
+msgstr "0(否)"
+
+msgid "default to 1"
+msgstr "默认启用，0(不启用)"
+
+msgid "default to 0"
+msgstr "默认不启用启用，1(启用)"
+
+msgid "A DigitalChina Supplicant for Linux and openwrt os.The Author is pentie.ouyang made it for openwrt."
+msgstr "一个Linux、openwrt下支持神州数码客户端校验算法的兼容客户端程序。原作者：pentie，欧阳修改至openwrt.原项目首页：https://code.google.com/p/zdcclient/"
+
+msgid "Config zdclient"
+msgstr "配置zdclient"
+
+msgid "zdclient"
+msgstr "神州数码认证"
+
+
+msgid "Configure zdclient's start option"
+msgstr "配置神州数码的启动选项"
+
+msgid "0(DhcpMode off)"
+msgstr "DHCP模式关闭"
+
+msgid "1(DhcpMode on)"
+msgstr "DHCP模式开启"
+
+msgid "DHCP type"
+msgstr "DHCP模式"
+
+msgid "DhcpMode"
+msgstr "DHCP模式"
+
+msgid "ip type"
+msgstr "自定义IP"
+
+msgid "0(ip type off)"
+msgstr "自定义IP模式关闭"
+
+msgid "1(ip type on)"
+msgstr "自定义IP模式开启"
+
+msgid "DNS"
+msgstr ""
+
+msgid "IP"
+msgstr ""
+
+msgid "Password"
+msgstr "密码"
+
+msgid "enable or disable zdclient"
+msgstr "启用或禁用 zdclient"
+
+msgid "Start at boot"
+msgstr "开机启动"
+
+msgid "Start zdclient when the route is booting."
+msgstr "随路由器启动zdclient"
+
+msgid "Start option"
+msgstr "启动选项"
+
+msgid "The options below are all of zdclient's arguments. The options below will work when dhcp and noipMode is set."
+msgstr "下面的选项是zdclient的所有参数,IP等设置仅在自定义IP和DHCP自定义IP模式下有效,伪IP必须开启DHCP"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "client version"
+msgstr "客户端版本号"
+
+
+msgid "default to localhost's netmask"
+msgstr "默认子网掩码 255.255.255.0"
+
+msgid "default gateway to 192.168.1.1"
+msgstr "默认网关 192.168.1.1"
+
+msgid "default DNS to 192.168.1.1"
+msgstr "默认DNS 192.168.1.1"
+
+msgid "default to 192.168.1.1"
+msgstr "默认192.168.1.1"
+
+msgid "default to 3.6.04.1110fk.""
+msgstr "默认版本为3.6.04.1110fk。"
+
+
+msgid "default to localhost's IP 169.0.0.1"
+msgstr "默认本机 IP 169.0.0.1"
+
+msgid "zdclient_enable"
+msgstr "启用"
+
+msgid "gateway"
+msgstr "网关"
+
+msgid "net card name"
+msgstr "网卡名"
+
+msgid "netmask"
+msgstr "子网掩码"
+
+

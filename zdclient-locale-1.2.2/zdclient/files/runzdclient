@@ -1,0 +1,80 @@
+#!/bin/bash /etc/rc.common
+
+#Zdclient
+#Author:pentie
+#原项目主页：https://code.google.com/p/zdcclient/
+#zdclient for openwrt with luci
+#Author:ouyang
+#Email:ouyangshiliang223@gmail.com
+#
+# 配置执行文件名称必须是小写/usr/sbin/runzdclient，编码格式建议是UTF-8
+# 配置执行文件中一行开头的空格和Tab会被忽略，其他的会视为参数一部分
+# 配置文件中Section与Key不区分大小写，以#或;开头的行视为注释
+# 同一个参数若在命令行参数和配置文件中均有设置，使用命令行参数
+# 命令行中使用参数-h或-?可查看详细参数信息，建议通过命令行设置参数
+
+#用户名，长度不超过64
+Username=$(uci get zdclient.@zdclient[0].Username)
+#密码(简单加密)
+Password=$(uci get zdclient.@zdclient[0].Password)
+#网卡
+Nic=$(uci get zdclient.@zdclient[0].Nic)
+#静态IP用户可以使用非本机IP
+IP=$(uci get zdclient.@zdclient[0].IP)
+#掩码，无关紧要
+Mask=$(uci get zdclient.@zdclient[0].Mask)
+#网关，如果指定了就会监视网关ARP信息
+Gateway=$(uci get zdclient.@zdclient[0].Gateway)
+#DNS服务器，无关紧要
+DNS=$(uci get zdclient.@zdclient[0].DNS)
+#DHCP方式 0(不使用) 1(使用)
+DhcpMode=$(uci get zdclient.@zdclient[0].DhcpMode)
+#伪ip方式 0(不使用) 1(使用)
+noipMode=$(uci get zdclient.@zdclient[0].noipMode)
+#客户端版本号，如果未开启客户端校验但对版本号有要求，可以在此指定，形如3.30
+Version=$(uci get zdclient.@zdclient[0].Version)
+#---------------------------------------------------------------------
+LOGFILE=/tmp/zdclient-test.log
+
+echo Beginning Authentication...
+
+##DHCP模式
+if [ $DhcpMode = 1 ];then
+{
+	if [ $noipMode = 1 ];then 
+	{
+	zdclient -b --dhcp --noip --ip $IP --mask $Mask -g $Gateway --ver $Version -u $Username -p $Password --device $Nic 2>&1|tee -i "$LOGFILE"
+	program_err=`sed -n -e '/^@@ERROR/p' $LOGFILE`
+	server_info=`sed -n -e '/^>>Server/p' $LOGFILE`
+	}
+	else
+	{
+	zdclient -b --dhcp --ver $Version -u $Username -p $Password --device $Nic 2>&1|tee -i "$LOGFILE"
+	program_err=`sed -n -e '/^@@ERROR/p' $LOGFILE`
+	server_info=`sed -n -e '/^>>Server/p' $LOGFILE`
+	}
+	fi
+}
+##固定IP模式
+else
+	{
+	zdclient -b --ip $IP --mask $Mask -g $Gateway --ver $Version -u $Username -p $PASSWORD --device $Nic 2>&1|tee -i "$LOGFILE"
+	program_err=`sed -n -e '/^@@ERROR/p' $LOGFILE`
+	server_info=`sed -n -e '/^>>Server/p' $LOGFILE`
+	}
+fi
+
+notify(){
+    	notify-send "Zdclinet" "$1";
+    	if [ $? -eq 127 ]; then
+        	echo "\`notify-send' not installed."
+        	echo "$1"
+    	fi
+	}
+
+for msg in "$program_err" "$server_info"; do
+    		if [[ $msg ]]; then
+        	notify "${msg##>>}"
+    		fi
+	done	
+
