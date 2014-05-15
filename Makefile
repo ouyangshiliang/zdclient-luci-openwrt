@@ -26,7 +26,7 @@ define Package/zdclient
 endef
 
 define Package/zdclient/description
-If you can¡'t figure out what this program does, you¡'re probably
+If you can't figure out what this program does, you're probably
 brain-dead and need immediate medical attention.
 endef
 
